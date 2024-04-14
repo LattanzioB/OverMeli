@@ -13,7 +13,7 @@ export default function Register() {
 
   return (
     <div>
-      <form from onSumit={registerUser}>
+      <form from onSubmit={registerUser}>
         <label>UserName</label>
         <input type='text' placeholder='enter UserName . . .' value={data.userName} onChange={(e)=> setData({...data, userName: e.target.value})}/>
         <label>Password</label>

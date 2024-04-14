@@ -1,4 +1,5 @@
-import {useState} from 'react'
+import {useState} from 'react';
+import axios from 'axios'
 
 export default function Login() {
   const [data, setData] = useState({
@@ -8,11 +9,12 @@ export default function Login() {
 
   const loginUser = (e) =>{
     e.preventDefault()
+     axios.get('/')
   }
 
   return (
     <div>
-      <form from onSumit={loginUser}>
+      <form from onSubmit={loginUser}>
         <label>UserName</label>
         <input type='text' placeholder='enter UserName . . .' value={data.userName} onChange={(e)=> setData({...data, userName: e.target.value})}/>
         <label>Password</label>
