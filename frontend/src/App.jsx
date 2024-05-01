@@ -7,7 +7,7 @@ import Login from './pages/Login'
 import axios from 'axios';
 import {Toaster} from 'react-hot-toast'
 
-axios.defaults.baseURL = 'http://host.docker.internal:8000';
+axios.defaults.baseURL = 'http://localhost:8000'//'http://host.docker.internal:8000';
 axios.defaults.withCredentials = true;
 
 

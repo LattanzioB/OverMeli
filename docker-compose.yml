@@ -7,6 +7,6 @@ services:
   frontend:
     build: /frontend/.
     ports:
-      - "8090:8080"
+      - "8090:8090"
     links:
       - loginapi
