@@ -1,5 +1,13 @@
 version: "3.8"
 services:
+  mongodb:
+    image: mongo
+    env_file: ./.env
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=$MONGODB_USER
+      - MONGO_INITDB_ROOT_PASSWORD=$MONGODB_PASSWORD
+    ports:
+      - $MONGODB_LOCAL_PORT:$MONGODB_DOCKER_PORT
   loginapi:
     depends_on:
       - mongodb
@@ -18,13 +26,3 @@ services:
       - "8090:8090"
     links:
       - loginapi
-  mongodb:
-    image: mongo:5.0.2
-    env_file: ./.env
-    environment:
-      - MONGO_INITDB_ROOT_USERNAME=$MONGODB_USER
-      - MONGO_INITDB_ROOT_PASSWORD=$MONGODB_PASSWORD
-    ports:
-      - $MONGODB_LOCAL_PORT:$MONGODB_DOCKER_PORT
-    volumes:
-      - db:/data/db

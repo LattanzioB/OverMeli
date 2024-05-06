@@ -22,7 +22,7 @@ const registerUser = async (req, res) => {
             })    
         }
         console.log(userName)
-        const exist = await User.findOne({userName}.exec())
+        const exist = await User.findOne({userName}).exec()
         if(exist) {
             return res.json({
                 error: 'Email is taken already'
