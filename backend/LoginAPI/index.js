@@ -3,11 +3,12 @@ const dotenv = require('dotenv').config();
 const cors = require('cors');
 const {mongoose} = require('mongoose')
 const cookieParser = require('cookie-parser')
+const {url} = require('./config')
 
 const app = express();
 
 //database connection
-mongoose.connect(process.env.MONGO_URL)
+mongoose.connect(url) //Web: process.env.MONGO_URL //docker: url
 .then(()=> console.log('Database Connected'))
 .catch((err) => console.log('Database not Connected', err))
 
