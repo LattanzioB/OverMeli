@@ -1,7 +1,7 @@
 const express = require('express');
-const router = express.Router();
+
 const cors = require('cors');
-const {test, registerUser, loginUser, getProfile} = require('../controller/auth_controller')
+const {AuthController} = require('../controller/auth_controller')
 /**
  * @swagger
  * components:
@@ -69,17 +69,28 @@ const {test, registerUser, loginUser, getProfile} = require('../controller/auth_
  */
 
 //middleware
-router.use(
-    cors({
-        credentials: true,
-        origin: 'http://localhost:8090'
-    })
-)
+class AuthRouter {
+    constructor(){
+        this.auth_router = express.Router();
+        this.auth_controller = new AuthController();
+        this.auth_router.use(
+            cors({
+                credentials: true,
+                origin: 'http://localhost:8090'
+            })
+        )
+        this.auth_router.post('/register', this.auth_controller.registerUser)
+        this.auth_router.post('/login', this.auth_controller.loginUser)
+        this.auth_router.get('/profile', this.auth_controller.getProfile)
+    }
 
-router.get('/', test)
-router.post('/register', registerUser)
-router.post('/login', loginUser)
-router.get('/profile', getProfile)
+    get_routes() {
+        return this.auth_router
+    }
+}
 
 
-module.exports = router
+
+
+
+module.exports = {AuthRouter}

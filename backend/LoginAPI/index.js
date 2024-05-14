@@ -6,6 +6,9 @@ const cookieParser = require('cookie-parser');
 //const {url} = require('./config')
 const {specs} = require('./swagger_config');
 const swaggerUi = require("swagger-ui-express");
+const {AuthRouter} = require('./routes/authRoutes')
+
+const routes = new AuthRouter();
 
 const {
   DB_USER,
@@ -22,13 +25,12 @@ mongoose.connect(url) //Web: process.env.MONGO_URL //docker: url
 .then(()=> console.log('Database Connected'))
 .catch((err) => console.log('Database not Connected', err))
 
-
 const app = express();
 //middleware
 app.use(express.json())
 app.use(cookieParser())
 app.use(express.urlencoded({extended: false}))
-app.use('/', require('./routes/authRoutes'))
+app.use('/', routes.get_routes())
 app.use(
   "/api-docs",
   swaggerUi.serve,
