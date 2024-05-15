@@ -16,12 +16,13 @@ const {
   DB_HOST,
   DB_PORT,
   DB_NAME,
+  MONGO_URL
 } = process.env;
 
 const url = `mongodb://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}?authSource=admin`;
 
 //database connection
-mongoose.connect(url) //Web: process.env.MONGO_URL //docker: url
+mongoose.connect(url) //Web: MONGO_URL //docker: url
 .then(()=> console.log('Database Connected'))
 .catch((err) => console.log('Database not Connected', err))
 

@@ -8,7 +8,7 @@ class AuthController {
         this.auth_service = new AuthService()
     }
 
-    static async registerUser(req, res){
+    async registerUser(req, res){
         try{
             const {userName, password} = req.body;
             // Check if name was entered
@@ -42,7 +42,7 @@ class AuthController {
         }
     }
 
-    static async asyncloginUser(req,res){
+    async loginUser(req,res){
         try {
             console.log(req.body)
             const {userName, password} = req.body;
@@ -72,7 +72,7 @@ class AuthController {
     }
 
     
-    static async getProfile(req, res) {
+    async getProfile(req, res) {
         const {token} = req.cookies
         if(token){
             jwt.verify(token, process.env.JWT_SECRET, {}, (err, user)=>{
