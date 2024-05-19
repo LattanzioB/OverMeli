@@ -12,7 +12,7 @@ services:
     depends_on:
       - mongodb
     build:
-      context: /backend/LoginAPI/.
+      context: /OverMeli-LoginAPI/.
       dockerfile: Dockerfile
     ports:
       - "8000:8000"
@@ -23,14 +23,14 @@ services:
       - DB_NAME=$MONGODB_DATABASE
       - DB_PORT=$MONGODB_DOCKER_PORT
   frontend:
-    build: /frontend/.
+    build: /OverMeli-Fronted/.
     ports:
       - "8090:8090"
     links:
       - loginapi
   test:
     build:
-      context: /backend/LoginAPI/.
+      context: /OverMeli-LoginAPI/.
       dockerfile: Dockerfile.test
     depends_on:
       - loginapi
