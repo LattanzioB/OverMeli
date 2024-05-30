@@ -4,3 +4,6 @@
 [submodule "OverMeli-Fronted"]
 	path = OverMeli-Fronted
 	url = https://github.com/LattanzioB/OverMeli-Fronted
+[submodule "OverMeli-TestE2E"]
+	path = OverMeli-TestE2E
+	url = https://github.com/LattanzioB/OverMeli-TestE2E.git
