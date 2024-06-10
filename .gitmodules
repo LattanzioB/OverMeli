@@ -7,3 +7,6 @@
 [submodule "OverMeli-TestE2E"]
 	path = OverMeli-TestE2E
 	url = https://github.com/LattanzioB/OverMeli-TestE2E.git
+[submodule "OverMeli-MeliApi"]
+	path = OverMeli-MeliApi
+	url = https://github.com/LattanzioB/OverMeli-MeliApi.git
