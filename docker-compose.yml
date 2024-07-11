@@ -1,4 +1,13 @@
 version: "3.8"
+
+volumes:
+  grafana-data:
+  prometheus-data:
+
+networks:
+  docker_network:
+    driver: bridge
+
 services:
   mongodb:
     image: mongo
@@ -8,6 +17,9 @@ services:
       - MONGO_INITDB_ROOT_PASSWORD=$MONGODB_PASSWORD
     ports:
       - $MONGODB_LOCAL_PORT:$MONGODB_DOCKER_PORT
+    networks:
+      - docker_network
+
   loginapi:
     depends_on:
       - mongodb
@@ -22,6 +34,9 @@ services:
       - DB_PASSWORD=$MONGODB_PASSWORD
       - DB_NAME=$MONGODB_DATABASE
       - DB_PORT=$MONGODB_DOCKER_PORT
+    networks:
+      - docker_network
+
   meliapi:
     depends_on:
       - mongodb
@@ -36,6 +51,9 @@ services:
       - DB_PASSWORD=$MONGODB_PASSWORD
       - DB_NAME=$MONGODB_DATABASE
       - DB_PORT=$MONGODB_DOCKER_PORT
+    networks:
+      - docker_network
+
   frontend:
     build: /OverMeli-Fronted/.
     ports:
@@ -43,10 +61,13 @@ services:
     links:
       - loginapi
       - meliapi
+    networks:
+      - docker_network
+
   test:
     build:
       context: /OverMeli-LoginAPI/.
-      dockerfile: Dockerfile.test
+      dockerfile: /test/Dockerfile.test
     depends_on:
       - loginapi
       - mongodb
@@ -56,3 +77,25 @@ services:
       - DB_PASSWORD=$MONGODB_PASSWORD
       - DB_NAME=$MONGODB_DATABASE
       - DB_PORT=$MONGODB_DOCKER_PORT
+    networks:
+      - docker_network
+
+  grafana:
+    image: grafana/grafana
+    container_name: grafana
+    hostname: grafana
+    ports:
+      - "3000:3000"
+    networks:
+      - docker_network
+
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus
+    hostname: prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    networks:
+      - docker_network
