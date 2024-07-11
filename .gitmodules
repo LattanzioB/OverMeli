@@ -1,0 +1,12 @@
+[submodule "OverMeli-LoginAPI"]
+	path = OverMeli-LoginAPI
+	url = https://github.com/LattanzioB/OverMeli-LoginAPI
+[submodule "OverMeli-Fronted"]
+	path = OverMeli-Fronted
+	url = https://github.com/LattanzioB/OverMeli-Fronted
+[submodule "OverMeli-TestE2E"]
+	path = OverMeli-TestE2E
+	url = https://github.com/LattanzioB/OverMeli-TestE2E.git
+[submodule "OverMeli-MeliApi"]
+	path = OverMeli-MeliApi
+	url = https://github.com/LattanzioB/OverMeli-MeliApi.git
